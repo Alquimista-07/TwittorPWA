@@ -1,6 +1,22 @@
-// Registramos el SW
+// NOTA: Hay que aclarar que el SW lo debemos servir en un servidor con protocolo https, por lo tanto para el curso lo vamos a
+// sirvir en GitHub Pages
+// Adicionalmene se nos va a presentar un error cuando despleguemos el proyecto en GitHub Pages debido a la ruta
+// que indicamos para el SW ya que nosotros indicamos que este se encuentra en la reiz pero verdaderamente este no lo esta,
+// por lo tanto para resolverlo vamos a hacer la siguiente validación para validar si estoy en desarrollo o producción y dependiendo
+// a ello nos ajuste la url obteniendola directamente.
+var url = window.location.href;
+var swLocation = '/TwittorPWA/sw.js';
+
+// Registramos el SW y ajustamos para la validación mencionanda anteriormente
 if ( navigator.serviceWorker ) {
-    navigator.serviceWorker.register('/sw.js');
+
+    if(url.includes('localhost')){
+        swLocation = '/sw.js';
+    }
+
+    //navigator.serviceWorker.register('/sw.js');
+    navigator.serviceWorker.register( swLocation );
+    
 }
 
 // Referencias de jQuery
