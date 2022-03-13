@@ -2,8 +2,8 @@
 importScripts('js/sw-utils.js');
 
 // Creamos unas constantes con los tipos de cache que vamos a manejar
-const STATIC_CACHE    = 'static-v2';
-const DYNAMIC_CACHE   = 'dynamic-v1';
+const STATIC_CACHE    = 'static-v3';
+const DYNAMIC_CACHE   = 'dynamic-v2';
 const INMUTABLE_CACHE = 'inmutable-v1';
 
 // Creamos nuestros arreglos con la información que queremos guardar en el cache static y el inmutable
@@ -51,7 +51,13 @@ self.addEventListener('activate', e => {
 
         keys.forEach( key => {
 
+            // Ajustamos para que borre el cache static para corroborar que se actualice
             if (  key !== STATIC_CACHE && key.includes('static') ) {
+                return caches.delete(key);
+            }
+
+            // Ajustamos para que borre el cache dinamico para corroborar que se actualice
+            if (  key !== DYNAMIC_CACHE && key.includes('dynamic') ) {
                 return caches.delete(key);
             }
 
