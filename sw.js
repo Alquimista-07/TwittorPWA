@@ -8,7 +8,8 @@ const INMUTABLE_CACHE = 'inmutable-v1';
 
 // Creamos nuestros arreglos con la información que queremos guardar en el cache static y el inmutable
 const APP_SHELL = [
-    '/',
+    // Ajustamos el / ya que no va a servir en producción
+    //'/',
     'index.html',
     'css/style.css',
     'img/favicon.ico',
